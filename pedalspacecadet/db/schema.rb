@@ -10,9 +10,77 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20170124201719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "booking_comments", force: :cascade do |t|
+    t.integer  "booking_id"
+    t.text     "comments"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_booking_comments_on_booking_id", using: :btree
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.integer  "cyclist_id"
+    t.integer  "mechanic_id"
+    t.text     "description"
+    t.string   "status"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["cyclist_id"], name: "index_bookings_on_cyclist_id", using: :btree
+    t.index ["mechanic_id"], name: "index_bookings_on_mechanic_id", using: :btree
+  end
+
+  create_table "requested_services", force: :cascade do |t|
+    t.integer  "service_id"
+    t.integer  "booking_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_requested_services_on_booking_id", using: :btree
+    t.index ["service_id"], name: "index_requested_services_on_service_id", using: :btree
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string   "type"
+    t.integer  "cyclist_id"
+    t.integer  "mechanic_id"
+    t.integer  "rating"
+    t.text     "comments"
+    t.boolean  "did_pay"
+    t.boolean  "service_expected"
+    t.boolean  "price_expected"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["cyclist_id"], name: "index_reviews_on_cyclist_id", using: :btree
+    t.index ["mechanic_id"], name: "index_reviews_on_mechanic_id", using: :btree
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.integer  "mechanic_id"
+    t.string   "name"
+    t.integer  "price"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["mechanic_id"], name: "index_services_on_mechanic_id", using: :btree
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "type"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "photo"
+    t.string   "email"
+    t.string   "password_digest"
+    t.text     "bio"
+    t.integer  "avg_rating"
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "postal_code"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
 end
