@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :user do
     type ""
-    first_name "MyString"
+    first_name Faker::Name.first_name
     last_name "MyString"
     photo "MyString"
     email "MyString"
