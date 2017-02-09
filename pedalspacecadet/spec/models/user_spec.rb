@@ -15,4 +15,9 @@ RSpec.describe User, type: :model do
     user = FactoryGirl.build(:user, last_name: nil)
     expect(user).to_not be_valid
   end
+
+  it "has an email" do
+    user = FactoryGirl.build(:user, email: nil)
+    expect(user).to_not be_valid
+  end
 end
