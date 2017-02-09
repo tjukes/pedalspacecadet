@@ -10,4 +10,9 @@ RSpec.describe User, type: :model do
     user = FactoryGirl.build(:user, first_name: nil)
     expect(user).to_not be_valid
   end
+
+  it "has a last name" do
+    user = FactoryGirl.build(:user, last_name: nil)
+    expect(user).to_not be_valid
+  end
 end
