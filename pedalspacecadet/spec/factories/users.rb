@@ -5,7 +5,7 @@ FactoryGirl.define do
     last_name Faker::Name.last_name
     photo "MyString"
     email Faker::Internet.safe_email
-    password_digest "MyString"
+    password Faker::Internet.password
     bio "MyText"
     avg_rating 1
     street_address "MyString"
